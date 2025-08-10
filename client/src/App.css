@@ -1,0 +1,124 @@
+/* === Global Styles & Font === */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa; /* Lighter grey background */
+  color: #212529; /* Darker text for better contrast */
+}
+
+/* === Main App Container === */
+.App {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* === Navigation Bar === */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 15px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #007bff; /* Primary brand color */
+}
+
+nav .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #495057;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+nav a:hover {
+    color: #007bff;
+}
+
+nav span {
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+/* === Buttons === */
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+/* === Forms & Inputs === */
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  box-sizing: border-box; /* Important for consistent sizing */
+  font-family: 'Inter', sans-serif;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* === Project & Proposal Cards === */
+.card {
+  background-color: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.card h3 {
+  margin-top: 0;
+  color: #343a40;
+}
+.card .card-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
