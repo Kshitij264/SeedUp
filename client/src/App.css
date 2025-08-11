@@ -1,53 +1,50 @@
-/* === Global Styles & Font === */
+/* Global Styles */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f9fa; /* Lighter grey background */
-  color: #212529; /* Darker text for better contrast */
+  background-color: #f8f9fa;
+  color: #212529;
 }
 
-/* === Main App Container === */
 .App {
-  max-width: 960px;
-  margin: 20px auto;
-  padding: 20px;
+  padding: 0 20px;
 }
 
-/* === Navigation Bar === */
+/* Navigation Bar */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
   padding: 15px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hamburger-icon {
+  display: none;
+  font-size: 1.5em;
+  cursor: pointer;
 }
 
 nav h1 {
   margin: 0;
   font-size: 1.8em;
   font-weight: 700;
-  color: #007bff; /* Primary brand color */
+  color: #007bff;
 }
 
 nav .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #495057;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-nav a:hover {
-    color: #007bff;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 nav span {
@@ -55,7 +52,7 @@ nav span {
   color: #6c757d;
 }
 
-/* === Buttons === */
+/* Buttons */
 button {
   display: inline-flex;
   align-items: center;
@@ -70,18 +67,19 @@ button {
   font-family: 'Inter', sans-serif;
   transition: background-color 0.2s, box-shadow 0.2s;
 }
+
 button:hover {
   background-color: #0056b3;
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
 }
 
-/* === Forms & Inputs === */
+/* Forms & Inputs */
 .form-container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-top: 20px;
 }
 
 input, textarea, select {
@@ -90,16 +88,17 @@ input, textarea, select {
   margin-bottom: 15px;
   border-radius: 8px;
   border: 1px solid #ced4da;
-  box-sizing: border-box; /* Important for consistent sizing */
+  box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
+
 input:focus, textarea:focus, select:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-/* === Project & Proposal Cards === */
+/* Cards */
 .card {
   background-color: #fff;
   border: 1px solid #e9ecef;
@@ -109,16 +108,90 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
+
 .card h3 {
   margin-top: 0;
   color: #343a40;
 }
+
 .card .card-footer {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Layouts */
+.main-layout {
+  display: flex;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.desktop-sidebar {
+  flex-shrink: 0;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Login Page */
+.login-page-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  height: calc(100vh - 40px);
+  gap: 20px;
+}
+
+.login-branding {
+  padding: 20px;
+  text-align: center;
+}
+
+.login-branding h1 {
+  font-size: 3em;
+  color: #007bff;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 900px) {
+  .login-page-container {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: 40px 0;
+  }
+
+  .login-branding {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  nav {
+    flex-direction: row;
+  }
+
+  .nav-links span {
+    display: none;
+  }
+
+  .hamburger-icon {
+    display: block;
+  }
+
+  .desktop-sidebar {
+    display: none;
+  }
 }

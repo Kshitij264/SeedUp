@@ -1,40 +1,37 @@
 import { useState } from "react";
 import { db, auth } from "./firebase";
 import { collection, addDoc } from "firebase/firestore";
+// --- NEW --- Import toast
+import toast from 'react-hot-toast';
 
 export const ProjectForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // This creates a reference to our "projects" collection in Firestore
   const projectsCollectionRef = collection(db, "projects");
 
   const onSubmitProject = async () => {
-    // A simple check to prevent submitting an empty form
     if (!title || !description) {
-      alert("Please enter a title and description.");
+      toast.error("Please enter a title and description."); // --- NEW ---
       return;
     }
     try {
-      // The addDoc function saves the data to the collection
       await addDoc(projectsCollectionRef, {
         title: title,
         description: description,
-        // We link the project to the user who is currently logged in
         authorId: auth.currentUser.uid,
       });
-      // Clear the form fields after a successful submission
       setTitle("");
       setDescription("");
-      alert("Project submitted successfully!");
+      toast.success("Project submitted successfully!"); // --- NEW ---
     } catch (err) {
       console.error("Error submitting project:", err);
-      alert("There was an error submitting your project. Please try again.");
+      toast.error("There was an error submitting your project."); // --- NEW ---
     }
   };
 
   return (
-    <div>
+    <div className="form-container"> {/* Updated className */}
       <h3>Submit a New Project</h3>
       <input
         placeholder="Project Title..."

@@ -5,7 +5,6 @@ import { getDocs, collection } from 'firebase/firestore';
 export const ProposalList = () => {
     const [proposalList, setProposalList] = useState([]);
     
-    // A reference to our "proposals" collection
     const proposalsCollectionRef = collection(db, "proposals");
 
     const getProposalList = useCallback(async () => {
@@ -29,7 +28,8 @@ export const ProposalList = () => {
         <div>
             <h2>Investor Proposals</h2>
             {proposalList.map((proposal) => (
-                <div key={proposal.id} className="project-card">
+                // --- FIX --- Add the className="card" here
+                <div key={proposal.id} className="card">
                     <h3>Investor seeks projects in: {proposal.areasOfInterest}</h3>
                     <p>Investment Range: {proposal.investmentRange}</p>
                 </div>
