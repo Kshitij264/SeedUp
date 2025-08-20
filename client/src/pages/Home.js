@@ -7,6 +7,7 @@ import { LoanList } from '../LoanList.js';
 import { BusinessAdvisorForm } from '../BusinessAdvisorForm.js';
 import { AdviceList } from '../AdviceList.js';
 import { AnimatedPage } from '../AnimatedPage';
+import { DashboardMetrics } from '../DashboardMetrics.js';
 
 export const Home = ({ userRole, activeView }) => {
 
@@ -19,24 +20,28 @@ export const Home = ({ userRole, activeView }) => {
             case 'advice':
                 return <AdviceList />;
             case 'projects':
-            default:
                 return <ProjectList />;
+            default:
+                return null;
         }
     };
 
     return (
         <AnimatedPage>
             <div>
-                {userRole === "business_person" && <ProjectForm />}
-                {userRole === "investor" && <InvestorProposalForm />}
-                {userRole === "banker" && <BankerForm />}
-                {userRole === "business_advisor" && <BusinessAdvisorForm />}
+                {/* If no view is selected, show the default dashboard */}
+                {!activeView && (
+                    <>
+                        <DashboardMetrics />
+                        {userRole === "business_person" && <ProjectForm />}
+                        {userRole === "investor" && <InvestorProposalForm />}
+                        {userRole === "banker" && <BankerForm />}
+                        {userRole === "business_advisor" && <BusinessAdvisorForm />}
+                    </>
+                )}
 
-                <hr />
-                
-                <div className="view-content">
-                    {renderActiveView()}
-                </div>
+                {/* If a view IS selected, show only that list */}
+                {activeView && renderActiveView()}
             </div>
         </AnimatedPage>
     );

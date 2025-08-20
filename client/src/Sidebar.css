@@ -6,6 +6,8 @@
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.05);
   height: calc(100vh - 140px);
+  position: sticky;
+  top: 85px;
 }
 
 .sidebar-header {

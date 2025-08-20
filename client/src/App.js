@@ -9,7 +9,7 @@ import { Sidebar } from './Sidebar';
 import { auth, db } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { FaSignOutAlt, FaBars, FaHome } from 'react-icons/fa';
 import { Toaster } from 'react-hot-toast';
 import { AnimatePresence } from 'framer-motion';
 
@@ -18,7 +18,7 @@ function App() {
     const [userRole, setUserRole] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showSplash, setShowSplash] = useState(true);
-    const [activeView, setActiveView] = useState('projects');
+    const [activeView, setActiveView] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function App() {
     const logout = async () => {
         try {
             await signOut(auth);
-            setActiveView('projects');
+            setActiveView(null);
         } catch (err) {
             console.error(err);
         }
@@ -80,7 +80,7 @@ function App() {
     return (
         <Router>
             <Toaster position="top-center" reverseOrder={false} />
-            {/* The pop-out sidebar is now here, outside the main .App container, to avoid layout conflicts */}
+            {/* --- THE FIX --- The pop-out MOBILE sidebar is now completely separate */}
             {user && <Sidebar activeView={activeView} setActiveView={setActiveView} isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} isMobile={true} />}
             
             <div className="App">
@@ -93,6 +93,9 @@ function App() {
                             <h1>SeedUp</h1>
                         </div>
                         <div className="nav-links">
+                            <button onClick={() => setActiveView(null)}>
+                                <FaHome /> Home
+                            </button>
                             <span>Welcome, {user.email} ({userRole})</span>
                             <button onClick={logout}> <FaSignOutAlt /> Logout</button>
                         </div>
@@ -100,7 +103,7 @@ function App() {
                 )}
                 
                 <div className="main-layout">
-                    {/* The desktop sidebar remains here */}
+                    {/* --- THE FIX --- The DESKTOP sidebar is in its own container */}
                     <div className="desktop-sidebar">
                         {user && <Sidebar activeView={activeView} setActiveView={setActiveView} />}
                     </div>

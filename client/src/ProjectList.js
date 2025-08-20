@@ -1,13 +1,15 @@
 import { useEffect, useState, useCallback } from 'react';
 import { db, auth } from './firebase';
 import { getDocs, collection, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa'; // Import all needed icons
+import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';
 
 export const ProjectList = () => {
     const [projectList, setProjectList] = useState([]);
     const [editingProjectId, setEditingProjectId] = useState(null);
     const [updatedTitle, setUpdatedTitle] = useState("");
     const [updatedDescription, setUpdatedDescription] = useState("");
+    // --- NEW --- State to hold the search term
+    const [searchTerm, setSearchTerm] = useState("");
 
     const projectsCollectionRef = collection(db, "projects");
 
@@ -19,7 +21,8 @@ export const ProjectList = () => {
                 id: doc.id,
             }));
             setProjectList(filteredData);
-        } catch (err) {
+        } catch (err)
+        {
             console.error(err);
         }
     }, [projectsCollectionRef]);
@@ -32,7 +35,7 @@ export const ProjectList = () => {
         try {
             const projectDoc = doc(db, "projects", id);
             await deleteDoc(projectDoc);
-            getProjectList(); // Refresh the list
+            getProjectList();
         } catch (err) {
             console.error(err);
         }
@@ -45,8 +48,8 @@ export const ProjectList = () => {
                 title: updatedTitle,
                 description: updatedDescription,
             });
-            setEditingProjectId(null); // Exit editing mode
-            getProjectList(); // Refresh the list
+            setEditingProjectId(null);
+            getProjectList();
         } catch (err) {
             console.error(err);
         }
@@ -58,14 +61,28 @@ export const ProjectList = () => {
         setUpdatedDescription(project.description);
     };
 
+    // --- NEW --- Filter the project list based on the search term before rendering
+    const filteredProjects = projectList.filter(project =>
+        project.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div>
             <h2>All Projects</h2>
-            {projectList.map((project) => (
+            
+            {/* --- NEW --- Search Input Field */}
+            <input
+                type="text"
+                placeholder="Search projects by title..."
+                onChange={(event) => {
+                    setSearchTerm(event.target.value);
+                }}
+            />
+
+            {/* We now map over the NEW filteredProjects array */}
+            {filteredProjects.map((project) => (
                 <div key={project.id} className="card">
                     {editingProjectId === project.id ? (
-                        // This is the EDITING VIEW
                         <div>
                             <input
                                 value={updatedTitle}
@@ -81,7 +98,6 @@ export const ProjectList = () => {
                             </div>
                         </div>
                     ) : (
-                        // This is the NORMAL VIEW
                         <div>
                             <h3>{project.title}</h3>
                             <p>{project.description}</p>
